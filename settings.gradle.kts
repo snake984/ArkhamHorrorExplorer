@@ -17,3 +17,6 @@ dependencyResolutionManagement {
 rootProject.name = "Arkham_Horror_Explorer"
 include(":androidApp")
 include(":shared")
+include(":domain")
+include(":api")
+include(":features:home")

@@ -14,15 +14,11 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    applyDefaultHierarchyTemplate()
-
     androidTarget {
         compilerOptions {
             apiVersion.set(KotlinVersion.KOTLIN_2_0)
         }
     }
-
-    task("testClasses")
 
     listOf(
         iosX64(),
@@ -30,14 +26,15 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "shared"
+            baseName = "domain"
             isStatic = true
         }
     }
 
+    task("testClasses")
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.domain)
+            //put your multiplatform dependencies here
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -46,7 +43,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.pandora.arkhamhorrorexplorer"
+    namespace = "com.pandora.domain"
     compileSdk = 34
     defaultConfig {
         minSdk = 26
