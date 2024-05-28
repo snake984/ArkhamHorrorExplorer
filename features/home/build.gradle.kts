@@ -36,9 +36,17 @@ kotlin {
             implementation(compose.material)
             implementation(compose.material3)
             implementation(compose.components.resources)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose.jb)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.androidx.lifecyle.viewmodel.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+
+        androidMain.dependencies {
+            implementation(libs.koin.android)
         }
     }
 }

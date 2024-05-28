@@ -8,12 +8,6 @@ plugins {
 
 @OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    //js()
-    //jvm()
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     androidTarget {
         compilerOptions {
             apiVersion.set(KotlinVersion.KOTLIN_2_0)
@@ -26,14 +20,15 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "domain"
+            baseName = "repositories"
             isStatic = true
         }
     }
 
-    task("testClasses")
     sourceSets {
         commonMain.dependencies {
+            implementation(projects.api)
+            implementation(projects.domain)
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
         }
@@ -44,7 +39,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.pandora.domain"
+    namespace = "com.pandora.repositories"
     compileSdk = 34
     defaultConfig {
         minSdk = 26
