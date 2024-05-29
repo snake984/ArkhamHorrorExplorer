@@ -9,7 +9,6 @@ plugins {
 
 @OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-
     androidTarget {
         compilerOptions {
             apiVersion.set(KotlinVersion.KOTLIN_2_0)
@@ -35,6 +34,7 @@ kotlin {
             implementation(libs.kotlinx.serialization)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negociation)
+            implementation(libs.ktor.client.logging)
             implementation(libs.ktor.serialization.kotlinx)
         }
         androidMain.dependencies {

@@ -5,8 +5,6 @@ import com.pandora.domain.repositories.CardsRepository
 import com.pandora.domain.usecases.FetchPacksUsecase
 import kotlinx.coroutines.flow.Flow
 
-class FetchPacksUsecaseImpl(private val cardsRepository: CardsRepository): FetchPacksUsecase {
-    override fun invoke(): Flow<List<Pack>> {
-        return cardsRepository.fetchPacks()
-    }
+internal class FetchPacksUsecaseImpl(private val cardsRepository: CardsRepository): FetchPacksUsecase {
+    override fun invoke(): Flow<List<Pack>> = cardsRepository.fetchPacks()
 }

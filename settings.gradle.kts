@@ -4,6 +4,7 @@ pluginManagement {
         google()
         gradlePluginPortal()
         mavenCentral()
+        includeBuild("plugins")
     }
 }
 
@@ -20,5 +21,7 @@ include(":shared")
 include(":domain")
 include(":api")
 include(":features:home")
-include(":designsystem")
+include(":libraries:designsystem")
 include(":repositories")
+include(":libraries:coroutines")
+include(":libraries:parcelable")

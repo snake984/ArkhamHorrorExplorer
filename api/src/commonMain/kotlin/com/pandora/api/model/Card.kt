@@ -5,10 +5,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Card(
-    val code: String,
-    val name: String,
-    val text: String,
-    val url: String,
-    @SerialName("imagesrc") val frontImage: String,
-    @SerialName("backimagesrc") val backImage: String
+    val code: String? = null,
+    val name: String? = null,
+    val text: String? = null,
+    val url: String? = null,
+    @SerialName("imagesrc") val frontImage: String?= null,
+    @SerialName("backimagesrc") val backImage: String? = null
 )

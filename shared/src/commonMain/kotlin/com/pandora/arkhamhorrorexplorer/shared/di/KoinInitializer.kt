@@ -1,6 +1,7 @@
 package com.pandora.arkhamhorrorexplorer.shared.di
 
 import com.pandora.api.di.apiModule
+import com.pandora.coroutines.di.coroutinesModule
 import com.pandora.domain.di.domainModule
 import com.pandora.home.di.homeModule
 import com.pandora.repositories.di.repositoriesModule
@@ -15,8 +16,9 @@ fun initKoin(appModule: Module = module { }) {
 }
 
 internal val appModules = listOf(
-    homeModule,
+    coroutinesModule,
     apiModule,
     repositoriesModule,
     domainModule,
+    homeModule,
 )

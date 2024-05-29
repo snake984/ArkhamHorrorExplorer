@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.compose)
     alias(libs.plugins.compose.compiler)
+    id("kotlin-parcelize")
 }
 
 @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -13,6 +14,11 @@ kotlin {
     androidTarget {
         compilerOptions {
             apiVersion.set(KotlinVersion.KOTLIN_2_0)
+            //TODO - Extract in custom plugin
+            freeCompilerArgs.addAll(
+                "-P",
+                "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation=com.pandora.parcelable.CommonParcelize"
+            )
         }
     }
 
@@ -31,6 +37,9 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.domain)
+            implementation(projects.libraries.coroutines)
+            implementation(projects.libraries.designsystem)
+            implementation(projects.libraries.parcelable)
             implementation(compose.runtime)
             implementation(compose.materialIconsExtended)
             implementation(compose.material)

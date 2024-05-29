@@ -13,6 +13,7 @@ internal class CardsRepositoryImpl(private val apiClient: ApiClient) : CardsRepo
             emit(apiClient.fetchPacks().map {
                 Pack(
                     name = it.name,
+                    cardCount = it.cardCount,
                     code = it.code,
                     available = it.available,
                     url = it.url,
@@ -23,14 +24,16 @@ internal class CardsRepositoryImpl(private val apiClient: ApiClient) : CardsRepo
 
     override fun fetchCards(packCode: String): Flow<List<Card>> {
         return flow {
-            emit(apiClient.fetchCards(packCode).map {
+            emit(apiClient.fetchCards(packCode)
+                .filter { it.code != null && it.name != null && it.url != null }
+                .map {
                 Card(
-                    code = it.code,
-                    name = it.name,
+                    code = it.code ?: throw IllegalStateException("Card code is not allowed to be null"),
+                    name = it.name ?: throw IllegalStateException("Card name is not allowed to be null"),
                     text = it.text,
-                    url = it.url,
-                    frontImage = it.frontImage,
-                    backImage = it.backImage,
+                    url = it.url ?: throw IllegalStateException("Card url is not allowed to be null"),
+                    frontImage = "${apiClient.domainUrl}${it.frontImage}",
+                    backImage = "${apiClient.domainUrl}${it.backImage}",
                 )
             })
         }

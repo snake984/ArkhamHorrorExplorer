@@ -2,17 +2,21 @@ package com.pandora.home.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pandora.domain.usecases.FetchCardsUsecase
 import com.pandora.domain.usecases.FetchPacksUsecase
 import com.pandora.home.model.Pack
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class HomeViewModel(
     private val fetchPacksUsecase: FetchPacksUsecase,
+    private val fetchCardsUsecase: FetchCardsUsecase,
     private val backgroundCoroutineContext: CoroutineContext
 ) : ViewModel() {
 
@@ -27,15 +31,20 @@ class HomeViewModel(
             fetchPacksUsecase()
                 .catch { _error.value = it }
                 .collectLatest {
-                _packs.value = it.map {
-                    Pack(
-                        name = it.name,
-                        code = it.code,
-                        available = it.available,
-                        url = it.url,
-                    )
+                    it.map {
+                        val firstCard = fetchCardsUsecase(it.code).firstOrNull()?.firstOrNull()
+
+                        val computedPack = Pack(
+                            name = it.name,
+                            code = it.code,
+                            cardCount = it.cardCount,
+                            available = it.available,
+                            imageUrl = firstCard?.frontImage,
+                        )
+
+                        _packs.value += computedPack
+                    }
                 }
-            }
         }
     }
 }
