@@ -1,9 +1,9 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
     repositories {
-        google()
         gradlePluginPortal()
         mavenCentral()
+        google()
         includeBuild("plugins")
     }
 }
@@ -21,7 +21,7 @@ include(":shared")
 include(":domain")
 include(":api")
 include(":features:home")
-include(":libraries:designsystem")
 include(":repositories")
+include(":libraries:designsystem")
 include(":libraries:coroutines")
 include(":libraries:parcelable")

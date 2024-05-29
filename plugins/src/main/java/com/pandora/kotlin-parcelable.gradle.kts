@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+package com.pandora
 
 val libs: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
