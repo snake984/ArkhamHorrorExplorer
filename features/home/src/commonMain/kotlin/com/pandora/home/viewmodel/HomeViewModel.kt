@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
@@ -32,7 +31,10 @@ class HomeViewModel(
                 .catch { _error.value = it }
                 .collectLatest {
                     it.map {
-                        val firstCard = fetchCardsUsecase(it.code).firstOrNull()?.firstOrNull()
+                        val firstCard = fetchCardsUsecase(it.code)
+                            .catch { _error.value = it }
+                            .firstOrNull()
+                            ?.firstOrNull()
 
                         val computedPack = Pack(
                             name = it.name,
@@ -46,5 +48,9 @@ class HomeViewModel(
                     }
                 }
         }
+    }
+
+    fun resetError() {
+        _error.value = null
     }
 }
