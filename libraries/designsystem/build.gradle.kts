@@ -10,12 +10,15 @@ plugins {
 
 @OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+    jvm()
+    jvmToolchain(17)
     androidTarget {
         compilerOptions {
             apiVersion.set(KotlinVersion.KOTLIN_2_0)
         }
     }
 
+    task("testClasses")
     listOf(
         iosX64(),
         iosArm64(),

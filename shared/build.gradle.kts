@@ -10,13 +10,11 @@ plugins {
 
 @OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    //js()
-    //jvm()
+    jvmToolchain(17)
+    jvm()
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-
-    applyDefaultHierarchyTemplate()
 
     androidTarget {
         compilerOptions {
@@ -25,7 +23,6 @@ kotlin {
     }
 
     task("testClasses")
-
     listOf(
         iosX64(),
         iosArm64(),

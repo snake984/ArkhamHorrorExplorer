@@ -8,8 +8,8 @@ plugins {
 
 @OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    //js()
-    //jvm()
+    jvm()
+    jvmToolchain(17)
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -20,6 +20,7 @@ kotlin {
         }
     }
 
+    task("testClasses")
     listOf(
         iosX64(),
         iosArm64(),
@@ -31,7 +32,6 @@ kotlin {
         }
     }
 
-    task("testClasses")
     sourceSets {
         commonMain.dependencies {
             implementation(libs.koin.core)

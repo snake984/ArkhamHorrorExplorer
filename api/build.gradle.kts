@@ -9,12 +9,15 @@ plugins {
 
 @OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+    jvm()
+    jvmToolchain(17)
     androidTarget {
         compilerOptions {
             apiVersion.set(KotlinVersion.KOTLIN_2_0)
         }
     }
 
+    task("testClasses")
     listOf(
         iosX64(),
         iosArm64(),
@@ -26,7 +29,6 @@ kotlin {
         }
     }
 
-    task("testClasses")
     sourceSets {
         commonMain.dependencies {
             implementation(libs.koin.core)
@@ -38,6 +40,9 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx)
         }
         androidMain.dependencies {
+            implementation(libs.ktor.client.okhttp)
+        }
+        jvmMain.dependencies {
             implementation(libs.ktor.client.okhttp)
         }
         commonTest.dependencies {
