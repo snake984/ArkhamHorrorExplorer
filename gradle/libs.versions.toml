@@ -4,7 +4,7 @@ kotlin = "2.0.0"
 jetbrainsKotlinJvm = "1.9.20"
 
 # KotlinX
-coroutines = "1.8.0"
+coroutines = "1.8.1"
 kotlinx_serialization = "1.6.3"
 
 # Compose
@@ -14,7 +14,7 @@ compose_windowsizeclass = "0.5.0"
 compose_compiler = "1.6.10"
 
 # Koin
-koin_core = "3.5.0"
+koin_core = "3.5.6"
 koin_test = "3.5.6"
 koin_android = "3.5.6"
 koin_compose_jb = "1.1.0"
@@ -27,6 +27,7 @@ lifecycle = "2.8.0"
 
 # Kamel
 kamel-image = "0.9.5"
+uiDesktop = "1.6.7"
 
 [libraries]
 
@@ -72,6 +73,7 @@ androidx-lifecyle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecyc
 
 # Kamel
 kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamel-image" }
+androidx-ui-desktop = { group = "androidx.compose.ui", name = "ui-desktop", version.ref = "uiDesktop" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -79,7 +81,6 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
-jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 kotlin_serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 compose = { id = "org.jetbrains.compose", version.ref = "compose_compiler" }
