@@ -2,6 +2,11 @@
 agp = "8.4.1"
 kotlin = "2.0.0"
 jetbrainsKotlinJvm = "1.9.20"
+jvmToolchain = "17"
+
+android_sdk_compile = "34"
+android_sdk_target = "34"
+android_sdk_min = "26"
 
 # KotlinX
 coroutines = "1.8.1"

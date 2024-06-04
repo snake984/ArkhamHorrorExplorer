@@ -7,11 +7,11 @@ plugins {
 
 android {
     namespace = "com.pandora.arkhamhorrorexplorer.android"
-    compileSdk = 34
+    compileSdk = libs.versions.android.sdk.compile.get().toInt()
     defaultConfig {
         applicationId = "com.pandora.arkhamhorrorexplorer.android"
-        minSdk = 26
-        targetSdk = 34
+        minSdk = libs.versions.android.sdk.min.get().toInt()
+        targetSdk = libs.versions.android.sdk.target.get().toInt()
         versionCode = 1
         versionName = "1.0"
     }

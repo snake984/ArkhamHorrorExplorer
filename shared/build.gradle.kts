@@ -1,38 +1,13 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import com.pandora.extensions.setFrameworkBaseName
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    id("com.pandora.multiplatform")
     alias(libs.plugins.compose)
     alias(libs.plugins.compose.compiler)
 }
 
-@OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    jvmToolchain(17)
-    jvm()
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
-    androidTarget {
-        compilerOptions {
-            apiVersion.set(KotlinVersion.KOTLIN_2_0)
-        }
-    }
-
-    task("testClasses")
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "shared"
-            isStatic = true
-        }
-    }
+    setFrameworkBaseName("shared")
 
     sourceSets {
         commonMain.dependencies {
@@ -58,12 +33,4 @@ kotlin {
 
 android {
     namespace = "com.pandora.arkhamhorrorexplorer"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 26
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
 }

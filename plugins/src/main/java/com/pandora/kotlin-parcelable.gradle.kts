@@ -1,6 +1,6 @@
 package com.pandora
 
-val libs: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
     kotlin("multiplatform")
@@ -8,4 +8,14 @@ plugins {
     id("kotlin-parcelize")
 }
 
-//TODO - Complete plugin to apply platform-specific parcelize in common modules
+kotlin {
+    androidTarget {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions {
+            freeCompilerArgs.addAll(
+                "-P",
+                "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation=com.pandora.parcelable.CommonParcelize"
+            )
+        }
+    }
+}
